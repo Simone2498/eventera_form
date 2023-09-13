@@ -106,7 +106,7 @@ def main():
         img = img.crop((0, 0, 720, 720))
 
         # Display the image
-        st.image(img, caption="Anteprima Copertina", use_column_width=True)
+        st.image(img, caption="Anteprima Copertina...", use_column_width=True)
 
         if st.button("RICHIEDI PUBBLICAZIONE", type="primary", use_container_width=True):
             send_data(img, eventdata)
