@@ -35,7 +35,7 @@ def send_data(img, eventdata):
     os.remove(f'{eventdata["eventday"]}_{code}.jpg')
     os.remove(f'{eventdata["eventday"]}_{code}.txt')
 
-    st.success("Event correctly loaded, we will contact you if needed!")
+    st.success("Evento caricato con successo. Il post verrá pubblicato e ti contatteremo solo se necessario!")
 
 
 length_captcha = 8
@@ -45,7 +45,7 @@ height = 150
 def captcha_control():
     #control if the captcha is correct
     if 'controllo' not in st.session_state or st.session_state['controllo'] == False:
-        st.title("Captcha Control 🤗")
+        st.title("Controllo Captcha 🤗")
         
         # define the session state for control if the captcha is correct
         st.session_state['controllo'] = False
@@ -63,7 +63,7 @@ def captcha_control():
         capta2_text = col2.text_area('Enter captcha text', height=30)
         
         
-        if st.button("Verify the code"):
+        if st.button("Verifica il codice"):
             print(capta2_text, st.session_state['Captcha'])
             capta2_text = capta2_text.replace(" ", "")
             # if the captcha is correct, the controllo session state is set to True
@@ -86,17 +86,17 @@ def captcha_control():
     
 # Main Streamlit app
 def main():
-    st.title("Image Upload and Email Entry")
+    st.title("EVENTERA - Richiesta di pubblicazione evento 📅")
     
     eventdata = {}
-    eventdata["email"] = st.text_input("Enter your email:")
-    eventdata["eventname"] = st.text_input("Enter the event name:")
-    eventdata["eventday"] = str(st.date_input("Enter the date of the event:", format="DD/MM/YYYY"))
-    eventdata["eventtime"] = str(st.time_input("Enter the starting time of the event:"))
-    eventdata["eventprice"] = st.number_input("Enter the price of the event or 0,00€ if free:", format="%.2f")
-    eventdata["eventplace"] = st.text_input("Enter the place of the event:")
+    eventdata["email"] = st.text_input("Inserisci la tua email:")
+    eventdata["eventname"] = st.text_input("Inserisci il nome dell'evento:")
+    eventdata["eventday"] = str(st.date_input("Inserisci la data dell'evento", format="DD/MM/YYYY"))
+    eventdata["eventtime"] = str(st.time_input("Inserisci l'ora di inizio dell'evento:"))
+    eventdata["eventprice"] = st.number_input("Inserisci il prezzo dell'evento o 0,00€ se gratuito:", format="%.2f")
+    eventdata["eventplace"] = st.text_input("Inserisci il luogo dell'evento:")
 
-    uploaded_file = st.file_uploader("Choose an image...", type="jpg")
+    uploaded_file = st.file_uploader("Inserisci un'immagine di copertina in formato post o storia", type="jpg")
 
     if uploaded_file is not None:
         
@@ -106,9 +106,9 @@ def main():
         img = img.crop((0, 0, 720, 720))
 
         # Display the image
-        st.image(img, caption="Uploaded Image.", use_column_width=True)
+        st.image(img, caption="Anteprima Copertina", use_column_width=True)
 
-        if st.button("SEND", type="primary", use_container_width=True):
+        if st.button("RICHIEDI PUBBLICAZIONE", type="primary", use_container_width=True):
             send_data(img, eventdata)
         
 
