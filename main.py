@@ -6,9 +6,6 @@ import json
 from captcha.image import ImageCaptcha
 import random, string
 
-from dotenv import load_dotenv
-load_dotenv()
-
 # Create S3 client
 s3 = boto3.client('s3', aws_access_key_id=st.secrets['AWS_ACCESS_KEY'], aws_secret_access_key=st.secrets['AWS_SECRET_KEY'])
 
